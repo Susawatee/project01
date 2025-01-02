@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทะเบียนเลขหนังสือ</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ทะเบียนเลขหนังสือ</h1>
+            <h2>ศูนย์ขายและวิศวกรรม</h2>
+        </div>
+        <form action="save.php" method="POST">
+            <div class="form-group">
+                <label for="date">วันที่:</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="form-group">
+                <label>จาก:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="from" value="ขบก.3.2 (ปน.)"> ขบภก.3.2(ปน.)</label>
+                    <label><input type="radio" name="from" value="อื่นๆ" id="fromOtherRadio"> อื่นๆ</label>
+                </div>
+                <div id="fromOtherInputContainer" style="display: none;">
+                    <input type="text" id="fromOtherInput" name="from_other" placeholder="ระบุข้อมูล">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ถึง:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="to" value="ผส.บกก.3.2 (ปน.)"> ผส.บภก.3.2(ปน.)</label>
+                    <label><input type="radio" name="to" value="รก.ผส.บกก.3.2 (ปน.)"> รก.ผส.บภก.3.2(ปน.)</label>
+                    <label><input type="radio" name="to" value="ช.ผส.บกก.3.2 (ปน.)"> ช.ผส.บภก.3.2(ปน.)</label>
+                    <label><input type="radio" name="to" value="อื่นๆ" id="toOtherRadio"> อื่นๆ</label>
+                </div>
+                <div id="toOtherInputContainer" style="display: none;">
+                    <input type="text" id="toOtherInput" name="to_other" placeholder="ระบุข้อมูล">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subject">เรื่อง:</label>
+                <input type="text" id="subject" name="subject" placeholder="คำตอบของคุณ">
+            </div>
+            <div class="form-group">
+                <label for="reason">หมายเหตุ:</label>
+                <input type="text" id="reason" name="note" placeholder="คำตอบของคุณ">
+            </div>
+            <div class="form-group button">
+                <button type="submit">ส่ง</button>
+            </div>            
+        </form>
+        <a href="page.html" class="back-button">กลับ</a>
+    </div>
+
+    <script>
+        const fromOtherRadio = document.getElementById('fromOtherRadio');
+        const toOtherRadio = document.getElementById('toOtherRadio');
+        const fromOtherInputContainer = document.getElementById('fromOtherInputContainer');
+        const toOtherInputContainer = document.getElementById('toOtherInputContainer');
+
+        fromOtherRadio.addEventListener('change', function() {
+            if (this.checked) {
+                fromOtherInputContainer.style.display = 'block';
+            } else {
+                fromOtherInputContainer.style.display = 'none';
+            }
+        });
+
+        toOtherRadio.addEventListener('change', function() {
+            if (this.checked) {
+                toOtherInputContainer.style.display = 'block';
+            } else {
+                toOtherInputContainer.style.display = 'none';
+            }
+        });
+
+        const selectElement = document.getElementById('unit');
+        let currentNumber = 1;
+
+        function addNextNumber() {
+            const option = document.createElement('option');
+            option.value = currentNumber;
+            option.textContent = currentNumber;
+            selectElement.appendChild(option);
+            currentNumber++;
+        }
+
+        addNextNumber();
+    </script>
+</body>
+</html>
